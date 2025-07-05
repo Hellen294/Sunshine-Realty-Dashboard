@@ -1,0 +1,165 @@
+<!-- This is the enhanced user dashboard page with everything requested -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>User Dashboard - Sunshine Realty</title>
+  <link href="https://fonts.googleapis.com/css2?family=Roboto&display=swap" rel="stylesheet">
+  <style>
+    body { font-family: 'Roboto', sans-serif; margin: 0; padding: 0; background: #eef2f5; }
+    header {
+      background: #114b8a; color: #fff; padding: 20px 40px;
+      display: flex; justify-content: space-between; align-items: center;
+    }
+    .container {
+      padding: 30px; max-width: 1000px; margin: auto;
+      background: #fff; border-radius: 10px; box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+    }
+    h2 { color: #114b8a; border-bottom: 2px solid #ddd; padding-bottom: 10px; }
+    table { width: 100%; border-collapse: collapse; margin-top: 10px; }
+    td { padding: 10px; border: 1px solid #ccc; }
+    .apartment-img {
+      width: 100%; border-radius: 8px; max-height: 400px; object-fit: cover; margin-top: 10px;
+    }
+    .features { padding-left: 20px; margin-top: 10px; }
+    .features li { margin-bottom: 6px; }
+    .cost { color: green; font-size: 1.3em; font-weight: bold; }
+    .approval-status {
+      background: #e0f7e9; border: 2px dashed green;
+      padding: 15px; color: #2e7d32; border-radius: 6px; margin-bottom: 20px;
+    }
+    .schedule-btn {
+      background: #114b8a; color: white; padding: 10px 18px;
+      border: none; border-radius: 6px; cursor: pointer; margin-top: 15px;
+    }
+    .modal { display: none; position: fixed; top: 0; left: 0;
+      width: 100%; height: 100%; background: rgba(0,0,0,0.5);
+      justify-content: center; align-items: center; z-index: 999;
+    }
+    .modal-content {
+      background: white; padding: 30px; width: 90%; max-width: 500px;
+      border-radius: 10px; text-align: center; position: relative;
+    }
+    .modal img { max-height: 200px; width: 100%; border-radius: 6px; object-fit: cover; margin-bottom: 10px; }
+    .modal .close-btn { position: absolute; top: 10px; right: 15px; font-size: 1.5em; cursor: pointer; color: #888; }
+    .modal select, .modal textarea {
+      width: 100%; padding: 10px; font-size: 1em; margin: 10px 0; border-radius: 6px;
+    }
+    .modal .confirm-msg {
+      background: #fff8e1; color: #8a6d3b; border: 1px solid #f0ad4e;
+      padding: 10px; border-radius: 6px;
+    }
+    .feedback-form {
+      margin-top: 40px; background: #f9f9f9;
+      padding: 20px; border-radius: 10px;
+      border: 1px solid #ddd;
+    }
+    .feedback-form label { display: block; margin: 10px 0 5px; }
+    .feedback-form input[readonly], .feedback-form textarea {
+      width: 100%; padding: 10px; border: 1px solid #ccc; border-radius: 6px;
+    }
+    .feedback-form button {
+      margin-top: 15px; background: #114b8a; color: white; padding: 10px 20px;
+      border: none; border-radius: 6px; cursor: pointer;
+    }
+    footer {
+      text-align: center; padding: 20px;
+      background: #114b8a; color: white; margin-top: 40px;
+    }
+  </style>
+</head>
+<body>
+
+<header>
+  <h1>Sunshine Realty Dashboard</h1>
+  <p>Welcome, Chanda Campbell</p>
+</header>
+
+<div class="container">
+  <div class="client-info">
+    <h2>Your Application</h2>
+    <table>
+      <tr><td><strong>Email:</strong></td><td>campbell.chanda1@gmail.com</td></tr>
+      <tr><td><strong>Phone:</strong></td><td>+1 954-982-5084</td></tr>
+      <tr><td><strong>Address:</strong></td><td>1447 Welson Rd Orlando, FL 32837</td></tr>
+      <tr><td><strong>Proposed Move-in Date:</strong></td><td>August 15, 2025</td></tr>
+    </table>
+  </div>
+
+  <div class="apartment-info">
+    <h2>Apartment Information</h2>
+    <img src="https://ttimages.blob.core.windows.net/property/dcb7e89e-0fb1-4899-974d-f0d865b6b8e1.jpg" class="apartment-img">
+    <p><strong>Location:</strong> 225 Orange Blossom Ave, Orlando, FL 32801</p>
+    <p class="cost">Monthly Rent: $1,950</p>
+    <ul class="features">
+      <li>2 Bedrooms, 2 Bathrooms</li>
+      <li>Fully Furnished</li>
+      <li>Central Air Conditioning</li>
+      <li>Washer & Dryer Included</li>
+      <li>Pet Friendly</li>
+      <li>Private Balcony</li>
+      <li>Modern Kitchen with Island</li>
+      <li>Walk-in Closets</li>
+      <li>Hardwood Flooring</li>
+      <li>24/7 Maintenance Service</li>
+    </ul>
+    <button class="schedule-btn" onclick="showModal()">Schedule Virtual Tour</button>
+  </div>
+
+  <div class="approval">
+    <h2>Approval Status</h2>
+    <div class="approval-status">
+      ✅ Application Approved - Awaiting Security Deposit Payment.
+    </div>
+  </div>
+
+  <!-- Feedback form -->
+  <div class="feedback-form">
+    <h2>Not Satisfied With the Approved Apartment?</h2>
+    <p>If you're not satisfied with the approved apartment, let us know your preferences below:</p>
+    <label>Name</label>
+    <input type="text" value="Amanda Green" readonly>
+    <label>Current Location</label>
+    <input type="text" value="225 Orange Blossom Ave, Orlando, FL" readonly>
+    <label>Message</label>
+    <textarea rows="4" placeholder="Tell us what kind of apartment you prefer..."></textarea>
+    <button>Submit Preferences</button>
+  </div>
+</div>
+
+<!-- Modal for virtual tour -->
+<div class="modal" id="tourModal">
+  <div class="modal-content">
+    <span class="close-btn" onclick="closeModal()">&times;</span>
+    <img src="https://ttimages.blob.core.windows.net/property/dcb7e89e-0fb1-4899-974d-f0d865b6b8e1.jpg">
+    <h3>Select a Virtual Tour Date</h3>
+    <select>
+      <option>-- Choose a Date --</option>
+      <option>August 16, 2025</option>
+      <option>August 17, 2025</option>
+      <option>August 18, 2025</option>
+    </select>
+    <p class="confirm-msg">ℹ️ Virtual tour is only available after payment confirmation.</p>
+  </div>
+</div>
+
+<footer>
+  &copy; 2025 Sunshine Realty. All Rights Reserved.
+</footer>
+
+<script>
+  function showModal() {
+    setTimeout(() => {
+      document.getElementById('tourModal').style.display = 'flex';
+    }, 1500);
+  }
+  function closeModal() {
+    document.getElementById('tourModal').style.display = 'none';
+  }
+  window.onclick = function(e) {
+    if (e.target === document.getElementById('tourModal')) closeModal();
+  }
+</script>
+</body>
+</html>
