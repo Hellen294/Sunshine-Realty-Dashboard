@@ -1,4 +1,3 @@
-<!-- This is the enhanced user dashboard page with everything requested -->
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -134,12 +133,13 @@
     <span class="close-btn" onclick="closeModal()">&times;</span>
     <img src="https://ttimages.blob.core.windows.net/property/dcb7e89e-0fb1-4899-974d-f0d865b6b8e1.jpg">
     <h3>Select a Virtual Tour Date</h3>
-    <select>
+    <select id="tourDateSelect">
       <option>-- Choose a Date --</option>
       <option>August 16, 2025</option>
       <option>August 17, 2025</option>
       <option>August 18, 2025</option>
     </select>
+    <button onclick="saveTourDate()" style="margin-top:10px;background:#114b8a;color:#fff;padding:10px 20px;border:none;border-radius:6px;">Save Date</button>
     <p class="confirm-msg">ℹ️ Virtual tour is only available after payment confirmation.</p>
   </div>
 </div>
@@ -148,18 +148,81 @@
   &copy; 2025 Sunshine Realty. All Rights Reserved.
 </footer>
 
+<!-- Firebase SDK -->
+<script src="https://www.gstatic.com/firebasejs/9.23.0/firebase-app-compat.js"></script>
+<script src="https://www.gstatic.com/firebasejs/9.23.0/firebase-database-compat.js"></script>
 <script>
-  function showModal() {
-    setTimeout(() => {
-      document.getElementById('tourModal').style.display = 'flex';
-    }, 1500);
+const firebaseConfig = {
+  apiKey: "AIzaSyBCjVwHfCK0kiXwes1fbKok-EU-aTnuJ2s",
+  authDomain: "words-a53db.firebaseapp.com",
+  databaseURL: "https://words-a53db-default-rtdb.firebaseio.com",
+  projectId: "words-a53db",
+  storageBucket: "words-a53db.firebasestorage.app",
+  messagingSenderId: "432659334745",
+  appId: "1:432659334745:web:504e12c193a04b0a6c9348"
+};
+
+firebase.initializeApp(firebaseConfig);
+const db = firebase.database();
+
+// Submit feedback form
+document.querySelector(".feedback-form button").addEventListener("click", () => {
+  const name = document.querySelector('.feedback-form input[readonly]').value;
+  const location = document.querySelectorAll('.feedback-form input[readonly]')[1].value;
+  const message = document.querySelector('.feedback-form textarea').value;
+
+  if (message.trim() === "") {
+    alert("Please enter your preference message.");
+    return;
   }
-  function closeModal() {
-    document.getElementById('tourModal').style.display = 'none';
+
+  db.ref("preferences").push({
+    name,
+    location,
+    message,
+    timestamp: new Date().toISOString()
+  }).then(() => {
+    alert("Your preference has been submitted!");
+    document.querySelector('.feedback-form textarea').value = "";
+  }).catch(err => {
+    alert("Submission failed: " + err.message);
+  });
+});
+
+// Tour modal
+function showModal() {
+  document.getElementById('tourModal').style.display = 'flex';
+}
+function closeModal() {
+  document.getElementById('tourModal').style.display = 'none';
+}
+window.onclick = function(e) {
+  if (e.target === document.getElementById('tourModal')) closeModal();
+}
+
+// Save selected tour date
+function saveTourDate() {
+  const tourDate = document.getElementById("tourDateSelect").value;
+  const name = "Chanda Campbell";
+  const email = "campbell.chanda1@gmail.com";
+
+  if (tourDate === "-- Choose a Date --") {
+    alert("Please select a valid tour date.");
+    return;
   }
-  window.onclick = function(e) {
-    if (e.target === document.getElementById('tourModal')) closeModal();
-  }
+
+  db.ref("tourDates").push({
+    name,
+    email,
+    tourDate,
+    timestamp: new Date().toISOString()
+  }).then(() => {
+    alert("Tour date saved successfully!");
+    closeModal();
+  }).catch(err => {
+    alert("Failed to save tour date: " + err.message);
+  });
+}
 </script>
 </body>
 </html>
