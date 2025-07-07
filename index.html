@@ -3,80 +3,183 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>User Dashboard - Sunshine Realty</title>
-  <link href="https://fonts.googleapis.com/css2?family=Roboto&display=swap" rel="stylesheet">
+  <title>Zillow - Dashboard</title>
+  <link href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@400;600&display=swap" rel="stylesheet">
   <style>
-    body { font-family: 'Roboto', sans-serif; margin: 0; padding: 0; background: #eef2f5; }
+    body {
+      margin: 0;
+      font-family: 'Open Sans', sans-serif;
+      background-color: #f6f7f8;
+    }
+
     header {
-      background: #114b8a; color: #fff; padding: 20px 40px;
-      display: flex; justify-content: space-between; align-items: center;
+      background-color: #006aff;
+      padding: 18px 40px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      color: white;
+      box-shadow: 0 1px 4px rgba(0, 0, 0, 0.1);
     }
+
+    header h1 {
+      margin: 0;
+      font-size: 1.5rem;
+    }
+
     .container {
-      padding: 30px; max-width: 1000px; margin: auto;
-      background: #fff; border-radius: 10px; box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+      max-width: 1100px;
+      margin: 30px auto;
+      padding: 20px;
+      background-color: white;
+      border-radius: 10px;
+      box-shadow: 0 4px 15px rgba(0, 0, 0, 0.05);
     }
-    h2 { color: #114b8a; border-bottom: 2px solid #ddd; padding-bottom: 10px; }
-    table { width: 100%; border-collapse: collapse; margin-top: 10px; }
-    td { padding: 10px; border: 1px solid #ccc; }
+
+    h2 {
+      color: #2c3e50;
+      font-size: 1.3rem;
+      margin-bottom: 15px;
+      border-bottom: 2px solid #eaeaea;
+      padding-bottom: 5px;
+    }
+
+    table {
+      width: 100%;
+      border-collapse: collapse;
+    }
+
+    td {
+      padding: 12px;
+      border-bottom: 1px solid #e0e0e0;
+    }
+
     .apartment-img {
-      width: 100%; border-radius: 8px; max-height: 400px; object-fit: cover; margin-top: 10px;
+      width: 100%;
+      border-radius: 8px;
+      object-fit: cover;
+      max-height: 350px;
+      margin-top: 10px;
     }
-    .features { padding-left: 20px; margin-top: 10px; }
-    .features li { margin-bottom: 6px; }
-    .cost { color: green; font-size: 1.3em; font-weight: bold; }
+
+    ul.features {
+      margin-top: 10px;
+      padding-left: 20px;
+    }
+
+    ul.features li {
+      margin-bottom: 5px;
+    }
+
+    .cost {
+      color: #007A1F;
+      font-weight: bold;
+      font-size: 1.2em;
+      margin-top: 10px;
+    }
+
     .approval-status {
-      background: #e0f7e9; border: 2px dashed green;
-      padding: 15px; color: #2e7d32; border-radius: 6px; margin-bottom: 20px;
+      background: #e6f3ff;
+      border: 1px solid #b3daff;
+      padding: 15px;
+      color: #004085;
+      border-radius: 6px;
     }
+
     .schedule-btn {
-      background: #114b8a; color: white; padding: 10px 18px;
-      border: none; border-radius: 6px; cursor: pointer; margin-top: 15px;
+      background: #006aff;
+      color: white;
+      padding: 10px 20px;
+      border: none;
+      border-radius: 6px;
+      cursor: pointer;
+      margin-top: 15px;
     }
-    .modal { display: none; position: fixed; top: 0; left: 0;
-      width: 100%; height: 100%; background: rgba(0,0,0,0.5);
-      justify-content: center; align-items: center; z-index: 999;
-    }
-    .modal-content {
-      background: white; padding: 30px; width: 90%; max-width: 500px;
-      border-radius: 10px; text-align: center; position: relative;
-    }
-    .modal img { max-height: 200px; width: 100%; border-radius: 6px; object-fit: cover; margin-bottom: 10px; }
-    .modal .close-btn { position: absolute; top: 10px; right: 15px; font-size: 1.5em; cursor: pointer; color: #888; }
-    .modal select, .modal textarea {
-      width: 100%; padding: 10px; font-size: 1em; margin: 10px 0; border-radius: 6px;
-    }
-    .modal .confirm-msg {
-      background: #fff8e1; color: #8a6d3b; border: 1px solid #f0ad4e;
-      padding: 10px; border-radius: 6px;
-    }
+
     .feedback-form {
-      margin-top: 40px; background: #f9f9f9;
-      padding: 20px; border-radius: 10px;
+      margin-top: 30px;
+      background: #f9f9f9;
+      padding: 20px;
+      border-radius: 10px;
       border: 1px solid #ddd;
     }
-    .feedback-form label { display: block; margin: 10px 0 5px; }
-    .feedback-form input[readonly], .feedback-form textarea {
-      width: 100%; padding: 10px; border: 1px solid #ccc; border-radius: 6px;
+
+    .feedback-form input,
+    .feedback-form textarea {
+      width: 100%;
+      padding: 10px;
+      margin-top: 6px;
+      margin-bottom: 16px;
+      border: 1px solid #ccc;
+      border-radius: 6px;
+      font-size: 1rem;
     }
+
     .feedback-form button {
-      margin-top: 15px; background: #114b8a; color: white; padding: 10px 20px;
-      border: none; border-radius: 6px; cursor: pointer;
+      background: #006aff;
+      color: white;
+      border: none;
+      padding: 10px 18px;
+      border-radius: 6px;
+      cursor: pointer;
     }
+
+    .modal {
+      display: none;
+      position: fixed;
+      top: 0; left: 0;
+      width: 100%; height: 100%;
+      background: rgba(0, 0, 0, 0.5);
+      justify-content: center;
+      align-items: center;
+      z-index: 999;
+    }
+
+    .modal-content {
+      background: white;
+      padding: 25px;
+      width: 90%;
+      max-width: 500px;
+      border-radius: 8px;
+      text-align: center;
+      position: relative;
+    }
+
+    .modal .close-btn {
+      position: absolute;
+      top: 10px;
+      right: 15px;
+      font-size: 1.4em;
+      cursor: pointer;
+      color: #aaa;
+    }
+
+    .modal img {
+      width: 100%;
+      max-height: 200px;
+      border-radius: 6px;
+      object-fit: cover;
+      margin-bottom: 10px;
+    }
+
     footer {
-      text-align: center; padding: 20px;
-      background: #114b8a; color: white; margin-top: 40px;
+      background: #006aff;
+      color: white;
+      text-align: center;
+      padding: 20px;
+      margin-top: 40px;
     }
   </style>
 </head>
 <body>
 
 <header>
-  <h1>Sunshine Realty Dashboard</h1>
+  <h1>Zillow Housing Agent</h1>
   <p>Welcome, Chanda Campbell</p>
 </header>
 
 <div class="container">
-  <div class="client-info">
+  <section>
     <h2>Your Application</h2>
     <table>
       <tr><td><strong>Email:</strong></td><td>campbell.chanda1@gmail.com</td></tr>
@@ -84,11 +187,11 @@
       <tr><td><strong>Address:</strong></td><td>1447 Welson Rd Orlando, FL 32837</td></tr>
       <tr><td><strong>Proposed Move-in Date:</strong></td><td>August 15, 2025</td></tr>
     </table>
-  </div>
+  </section>
 
-  <div class="apartment-info">
+  <section>
     <h2>Apartment Information</h2>
-    <img src="https://ttimages.blob.core.windows.net/property/dcb7e89e-0fb1-4899-974d-f0d865b6b8e1.jpg" class="apartment-img">
+    <img class="apartment-img" src="https://ttimages.blob.core.windows.net/property/dcb7e89e-0fb1-4899-974d-f0d865b6b8e1.jpg" alt="Apartment Image">
     <p><strong>Location:</strong> 225 Orange Blossom Ave, Orlando, FL 32801</p>
     <p class="cost">Monthly Rent: $1,950</p>
     <ul class="features">
@@ -104,30 +207,29 @@
       <li>24/7 Maintenance Service</li>
     </ul>
     <button class="schedule-btn" onclick="showModal()">Schedule Virtual Tour</button>
-  </div>
+  </section>
 
-  <div class="approval">
+  <section>
     <h2>Approval Status</h2>
     <div class="approval-status">
       ✅ Application Approved - Awaiting Security Deposit Payment.
     </div>
-  </div>
+  </section>
 
-  <!-- Feedback form -->
-  <div class="feedback-form">
+  <section class="feedback-form">
     <h2>Not Satisfied With the Approved Apartment?</h2>
     <p>If you're not satisfied with the approved apartment, let us know your preferences below:</p>
     <label>Name</label>
-    <input type="text" value="Chanda Campbell" readonly>
+    <input type="text" value="Amanda Green" readonly>
     <label>Current Location</label>
-    <input type="text" value="1447 Welson Rd Orlando, FL 32837" readonly>
+    <input type="text" value="225 Orange Blossom Ave, Orlando, FL" readonly>
     <label>Message</label>
     <textarea rows="4" placeholder="Tell us what kind of apartment you prefer..."></textarea>
     <button>Submit Preferences</button>
-  </div>
+  </section>
 </div>
 
-<!-- Modal for virtual tour -->
+<!-- Modal -->
 <div class="modal" id="tourModal">
   <div class="modal-content">
     <span class="close-btn" onclick="closeModal()">&times;</span>
@@ -139,90 +241,90 @@
       <option>August 17, 2025</option>
       <option>August 18, 2025</option>
     </select>
-    <button onclick="saveTourDate()" style="margin-top:10px;background:#114b8a;color:#fff;padding:10px 20px;border:none;border-radius:6px;">Save Date</button>
-    <p class="confirm-msg">ℹ️ Virtual tour is only available after payment confirmation.</p>
+    <br><br>
+    <button class="schedule-btn" onclick="saveTourDate()">Save Date</button>
+    <p style="margin-top:10px;font-size:0.9em;color:#555;">ℹ️ Virtual tour is only available after payment confirmation.</p>
   </div>
 </div>
 
 <footer>
-  &copy; 2025 Sunshine Realty. All Rights Reserved.
+  &copy; 2025 Zillow. All rights reserved.
 </footer>
 
-<!-- Firebase SDK -->
 <script src="https://www.gstatic.com/firebasejs/9.23.0/firebase-app-compat.js"></script>
 <script src="https://www.gstatic.com/firebasejs/9.23.0/firebase-database-compat.js"></script>
 <script>
-const firebaseConfig = {
-  apiKey: "AIzaSyBCjVwHfCK0kiXwes1fbKok-EU-aTnuJ2s",
-  authDomain: "words-a53db.firebaseapp.com",
-  databaseURL: "https://words-a53db-default-rtdb.firebaseio.com",
-  projectId: "words-a53db",
-  storageBucket: "words-a53db.firebasestorage.app",
-  messagingSenderId: "432659334745",
-  appId: "1:432659334745:web:504e12c193a04b0a6c9348"
-};
+  const firebaseConfig = {
+    apiKey: "AIzaSyBCjVwHfCK0kiXwes1fbKok-EU-aTnuJ2s",
+    authDomain: "words-a53db.firebaseapp.com",
+    databaseURL: "https://words-a53db-default-rtdb.firebaseio.com",
+    projectId: "words-a53db",
+    storageBucket: "words-a53db.firebasestorage.app",
+    messagingSenderId: "432659334745",
+    appId: "1:432659334745:web:504e12c193a04b0a6c9348"
+  };
+  firebase.initializeApp(firebaseConfig);
+  const db = firebase.database();
 
-firebase.initializeApp(firebaseConfig);
-const db = firebase.database();
+  document.querySelector(".feedback-form button").addEventListener("click", () => {
+    const name = document.querySelectorAll('.feedback-form input')[0].value;
+    const location = document.querySelectorAll('.feedback-form input')[1].value;
+    const message = document.querySelector('.feedback-form textarea').value;
 
-// Submit feedback form
-document.querySelector(".feedback-form button").addEventListener("click", () => {
-  const name = document.querySelector('.feedback-form input[readonly]').value;
-  const location = document.querySelectorAll('.feedback-form input[readonly]')[1].value;
-  const message = document.querySelector('.feedback-form textarea').value;
+    if (message.trim() === "") {
+      alert("Please enter your preference message.");
+      return;
+    }
 
-  if (message.trim() === "") {
-    alert("Please enter your preference message.");
-    return;
+    db.ref("preferences").push({
+      name,
+      location,
+      message,
+      timestamp: new Date().toISOString()
+    }).then(() => {
+      alert("Your preference has been submitted!");
+      document.querySelector('.feedback-form textarea').value = "";
+    }).catch(err => {
+      alert("Submission failed: " + err.message);
+    });
+  });
+
+  function showModal() {
+    document.getElementById("tourModal").style.display = "flex";
   }
 
-  db.ref("preferences").push({
-    name,
-    location,
-    message,
-    timestamp: new Date().toISOString()
-  }).then(() => {
-    alert("Your preference has been submitted!");
-    document.querySelector('.feedback-form textarea').value = "";
-  }).catch(err => {
-    alert("Submission failed: " + err.message);
-  });
-});
-
-// Tour modal
-function showModal() {
-  document.getElementById('tourModal').style.display = 'flex';
-}
-function closeModal() {
-  document.getElementById('tourModal').style.display = 'none';
-}
-window.onclick = function(e) {
-  if (e.target === document.getElementById('tourModal')) closeModal();
-}
-
-// Save selected tour date
-function saveTourDate() {
-  const tourDate = document.getElementById("tourDateSelect").value;
-  const name = "Chanda Campbell";
-  const email = "campbell.chanda1@gmail.com";
-
-  if (tourDate === "-- Choose a Date --") {
-    alert("Please select a valid tour date.");
-    return;
+  function closeModal() {
+    document.getElementById("tourModal").style.display = "none";
   }
 
-  db.ref("tourDates").push({
-    name,
-    email,
-    tourDate,
-    timestamp: new Date().toISOString()
-  }).then(() => {
-    alert("Tour date saved successfully!");
-    closeModal();
-  }).catch(err => {
-    alert("Failed to save tour date: " + err.message);
-  });
-}
+  window.onclick = function (e) {
+    if (e.target === document.getElementById("tourModal")) {
+      closeModal();
+    }
+  };
+
+  function saveTourDate() {
+    const tourDate = document.getElementById("tourDateSelect").value;
+    const name = "Chanda Campbell";
+    const email = "campbell.chanda1@gmail.com";
+
+    if (tourDate === "-- Choose a Date --") {
+      alert("Please select a valid tour date.");
+      return;
+    }
+
+    db.ref("tourDates").push({
+      name,
+      email,
+      tourDate,
+      timestamp: new Date().toISOString()
+    }).then(() => {
+      alert("Tour date saved successfully!");
+      closeModal();
+    }).catch(err => {
+      alert("Failed to save tour date: " + err.message);
+    });
+  }
 </script>
 </body>
 </html>
